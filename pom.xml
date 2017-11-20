@@ -60,7 +60,30 @@
         <version>0.0.24-SNAPSHOT</version>
     </parent>
 
-    <url>http://maven.apache.org</url>
+    <url>https://github.com/vatbub/${gitRepoName}</url>
+
+    <scm>
+        <connection>scm:git:git@github.com:vatbub/${gitRepoName}.git</connection>
+        <url>https://github.com/vatbub/${gitRepoName}</url>
+        <developerConnection>scm:git:git@github.com:vatbub/${gitRepoName}.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/vatbub/${gitRepoName}}/issues</url>
+    </issueManagement>
+
+    <ciManagement>
+        <system>Travis CI</system>
+        <url>https://travis-ci.org/vatbub/${gitRepoName}</url>
+    </ciManagement>
+
+    <properties>
+        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+        <gitRepoName>virustotalmavenplugin</gitRepoName>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <dependencies>
         <dependency>
