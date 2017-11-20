@@ -20,23 +20,6 @@ package com.github.vatbub;
  * #L%
  */
 
-
-/*
- * Copyright 2001-2005 The Apache Software Foundation.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 import com.kanishka.virustotal.dto.FileScanReport;
 import com.kanishka.virustotal.dto.ScanInfo;
 import com.kanishka.virustotal.exception.APIKeyNotFoundException;
@@ -49,11 +32,8 @@ import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +48,7 @@ public class VirusTotalMojo extends AbstractMojo {
     /**
      * The VirusTotal api key
      *
-     * @parameter
+     * @parameter property=virustotal.apiKey
      * @required
      */
     private String apiKey;
@@ -76,21 +56,23 @@ public class VirusTotalMojo extends AbstractMojo {
     /**
      * Specifies if the build shall fail if any artifact is marked as a virus.
      *
-     * @parameter default-value="false"
+     * @parameter default-value="false" property=virustotal.failIfVirus
      */
+    @SuppressWarnings("unused")
     private boolean failIfVirus;
 
     /**
      * Specifies whether requests to the virus total api shall be slowed down to avoid {@code QuotaExceededException}s
      *
-     * @parameter default-value="true"
+     * @parameter default-value="true" property=virustotal.slowRequestsDown
      */
+    @SuppressWarnings("unused")
     private boolean slowRequestsDown;
 
     /**
      * If true, skips the scan
      *
-     * @parameter default-value="false"
+     * @parameter default-value="false" property=virustotal.skipScan
      */
     private boolean skipScan;
 
@@ -110,13 +92,13 @@ public class VirusTotalMojo extends AbstractMojo {
         }
     }
 
-    private void doSlowDown() {
+    private void doSlowDown() throws MojoExecutionException {
         if (slowRequestsDown) {
             try {
                 getLog().info("Waiting a minute to avoid a QuotaExceededException... (Set slowRequestsDown to false in the plugin config if you wish to avoid this behaviour)");
                 Thread.sleep(60000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                throw new MojoExecutionException("Thread was interruped", e);
             }
         }
     }
