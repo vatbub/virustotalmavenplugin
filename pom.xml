@@ -71,7 +71,7 @@
         <dependency>
             <groupId>com.kanishka.api</groupId>
             <artifactId>VirustotalPublicV2.0</artifactId>
-            <version>1.1.rB-SNAPSHOT</version>
+            <version>1.1.rB</version>
         </dependency>
 
         <dependency>
