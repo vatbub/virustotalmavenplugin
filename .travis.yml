@@ -1,0 +1,25 @@
+language: java
+sudo: required
+jdk:
+- oraclejdk8
+addons:
+  sonarcloud:
+    organization: "vatbub-github"
+  apt:
+    packages:
+    - oracle-java8-installer
+cache:
+  directories:
+  - "$HOME/.m2"
+install: echo Install phase has been disabled as a complete build is run during deployment
+script:
+- mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar --settings travisMavenSettings.xml
+branches:
+  only:
+  - master
+notifications:
+  email:
+    recipients:
+    - vatbub123+travisbuildnotification@googlemail.com
+    on_success: never
+    on_failure: always
