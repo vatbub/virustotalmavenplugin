@@ -101,7 +101,7 @@ public class VirusTotalMojo extends AbstractMojo {
      */
     private MavenProject project;
 
-    private void checkQuotaExceededException(QuotaExceededException e) throws MojoExecutionException {
+    private void checkQuotaExceededException() throws MojoExecutionException {
         getLog().warn("Request rate of 4 requests per minute exceeded, waiting two minutes...");
         try {
             Thread.sleep(120000);
@@ -146,7 +146,7 @@ public class VirusTotalMojo extends AbstractMojo {
                         getLog().info("Detailed scan result available at: " + scanInfo.getPermalink());
                         break; // no exception
                     } catch (QuotaExceededException e) {
-                        checkQuotaExceededException(e);
+                        checkQuotaExceededException();
                     }
                 }
 
@@ -158,7 +158,7 @@ public class VirusTotalMojo extends AbstractMojo {
                         getLog().debug("Waiting for the scan to complete...");
                         report = virustotalPublicV2.getScanReport(scanInfo.getResource());
                     } catch (QuotaExceededException e) {
-                        checkQuotaExceededException(e);
+                        checkQuotaExceededException();
                     }
                 } while (report == null || report.getPositives() == null);
 
