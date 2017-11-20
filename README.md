@@ -59,6 +59,8 @@ Now, add the following to your `pom.xml`:
 Now, run `mvn clean verify` in your project and it will be uploaded to virus total. The plugin will output the URLs to the detailed reports for you to check out and to send to your customers as a proof that you don't sell viruses.
 
 # Advanced configuration
+## Skip a scan
+If you wish to skip a scan for a particular build, add `-Dvirustotal.skipScan=true` to the maven command line call.
 ## Make a build fail if VirusTotal considers an artifact a virus
 By default, a warning message will be put into the log if at least one artifact was recognized as a virus by at least one anti virus software.
 If you wish to make the build fail instead, you can add the following to the plugin configuration:
