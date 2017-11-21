@@ -9,9 +9,9 @@ package com.github.vatbub;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,6 +32,9 @@ import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
 import java.io.IOException;
@@ -40,47 +43,34 @@ import java.util.List;
 
 /**
  * Goal which sends all project artifacts to VirusTotal.
- *
- * @goal scan
- * @phase verify
  */
+@Mojo(name = "scan", defaultPhase = LifecyclePhase.VERIFY, requiresOnline = true)
 public class VirusTotalMojo extends AbstractMojo {
     /**
      * The VirusTotal api key
-     *
-     * @parameter property=virustotal.apiKey
-     * @required
      */
+    @Parameter(name = "apiKey", property = "virustotal.apiKey", required = true)
     private String apiKey;
 
     /**
      * Specifies if the build shall fail if any artifact is marked as a virus.
-     *
-     * @parameter default-value="false" property=virustotal.failIfVirus
      */
-    @SuppressWarnings("unused")
+    @Parameter(name = "failIfVirus", property = "virustotal.failIfVirus", defaultValue = "false")
     private boolean failIfVirus;
 
     /**
      * Specifies whether requests to the virus total api shall be slowed down to avoid {@code QuotaExceededException}s
-     *
-     * @parameter default-value="true" property=virustotal.slowRequestsDown
      */
-    @SuppressWarnings("unused")
+    @Parameter(name = "slowRequestsDown", property = "virustotal.slowRequestsDown", defaultValue = "true")
     private boolean slowRequestsDown;
 
     /**
      * If true, skips the scan
-     *
-     * @parameter default-value="false" property=virustotal.skipScan
      */
+    @Parameter(name = "skipScan", property = "virustotal.skipScan", defaultValue = "false")
     private boolean skipScan;
 
-    /**
-     * @parameter default-value = "${project}"
-     * @required
-     * @readonly
-     */
+    @Parameter(defaultValue = "${project}", required = true, readonly = true)
     private MavenProject project;
 
     private void checkQuotaExceededException() throws MojoExecutionException {
