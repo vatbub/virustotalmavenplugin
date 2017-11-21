@@ -9,9 +9,9 @@ package com.github.vatbub;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -49,28 +49,28 @@ public class VirusTotalMojo extends AbstractMojo {
     /**
      * The VirusTotal api key
      */
-    @Parameter(name = "apiKey", property = "virustotal.apiKey", required = true)
+    @Parameter(property = "virustotal.apiKey", required = true)
     private String apiKey;
 
     /**
      * Specifies if the build shall fail if any artifact is marked as a virus.
      */
-    @Parameter(name = "failIfVirus", property = "virustotal.failIfVirus", defaultValue = "false")
+    @Parameter(property = "virustotal.failIfVirus", defaultValue = "false")
     private boolean failIfVirus;
 
     /**
      * Specifies whether requests to the virus total api shall be slowed down to avoid {@code QuotaExceededException}s
      */
-    @Parameter(name = "slowRequestsDown", property = "virustotal.slowRequestsDown", defaultValue = "true")
+    @Parameter(property = "virustotal.slowRequestsDown", defaultValue = "true")
     private boolean slowRequestsDown;
 
     /**
      * If true, skips the scan
      */
-    @Parameter(name = "skipScan", property = "virustotal.skipScan", defaultValue = "false")
+    @Parameter(property = "virustotal.skipScan", defaultValue = "false")
     private boolean skipScan;
 
-    @Parameter(name = "project", defaultValue = "${project}", required = true, readonly = true)
+    @Parameter(defaultValue = "${project}", required = true, readonly = true)
     private MavenProject project;
 
     private void checkQuotaExceededException() throws MojoExecutionException {
