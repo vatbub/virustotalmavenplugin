@@ -10,23 +10,6 @@ However, sometimes it might be a good idea to show to customers a proof
 that your application is not a virus. This plugin creates that proof for you.
 
 ## Getting started
-### Building the plugin
-Since this plugin is still a work in progress, you need to clone two repos and build the plugin and one of its dependencies.
-Simply run the following lines of code in a command line window:
-
-```
-git clone git@github.com:kdkanishka/Virustotal-Public-API-V2.0-Client.git
-cd Virustotal-Public-API-V2.0-Client
-mvn clean install
-cd ..
-
-git clone git@github.com:vatbub/virustotalmavenplugin.git
-cd virustotalmavenplugin
-mvn clean install
-```
-
-*Note: The plugin and the api dependency will soon be released to maven central*
-
 ### The VirusTotal API Key
 1. Head over to [virustotal.com](https://www.virustotal.com/) and sign in or create an account if you don't already have one.
 2. Click your profile picture and go to [Settings -> API Key](https://www.virustotal.com/#/settings/apikey) (or just click the link ;) ) and copy your API key. 
@@ -39,7 +22,7 @@ Now, add the following to your `pom.xml`:
         <plugin>
             <groupId>com.github.vatbub</groupId>
             <artifactId>virustotal-maven-plugin</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.1</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
