@@ -109,6 +109,9 @@ public class VirusTotalMojo extends AbstractMojo {
             VirustotalPublicV2 virustotalPublicV2 = new VirustotalPublicV2Impl();
 
             for (Artifact artifact : artifactsToCheck) {
+                if (artifact==null || artifact.getFile()==null)
+                    continue;
+
                 doSlowDown();
                 ScanInfo scanInfo;
                 while (true) {
