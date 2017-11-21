@@ -70,7 +70,7 @@ public class VirusTotalMojo extends AbstractMojo {
     @Parameter(name = "skipScan", property = "virustotal.skipScan", defaultValue = "false")
     private boolean skipScan;
 
-    @Parameter(defaultValue = "${project}", required = true, readonly = true)
+    @Parameter(name = "project", defaultValue = "${project}", required = true, readonly = true)
     private MavenProject project;
 
     private void checkQuotaExceededException() throws MojoExecutionException {
