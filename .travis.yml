@@ -13,10 +13,9 @@ install:
 - tar -xf jdk-8u191-linux-x64.tar.gz
 - export JAVA_HOME=/home/travis/build/vatbub/virustotalmavenplugin/jdk1.8.0_191/
 script:
-- mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar --settings travisMavenSettings.xml
-branches:
-  only:
-  - master
+- mvn org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar --settings travisMavenSettings.xml
+after_success:
+- source ./travisAfterSuccess.sh
 notifications:
   email:
     recipients:
